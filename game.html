@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE LITTLE GAME</title>
+    <style>
+        #infoBox {
+            display: flex;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            justify-content: center;
+        }
+
+
+        .playerBox {
+            text-align: center;
+            width: 200px;
+        }
+
+
+        .playerBox h5 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .playerBox h6 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+
+        
+        #startBox {
+            display: flex;
+            align-items: center;
+        }
+
+
+        #app {
+            border: 1px solid #ececec;
+            padding: 10px 10px;
+            margin: 0 auto;
+            width: 600px;
+        }
+
+
+        #operationBox {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 5px;
+            border-top: 1px solid #ececec;
+            background-color: #f0f0f0;
+            margin: 0 auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    <script>
+        let humanScore = 0;
+        let computerScore = 0;
+        let humanHand = 0;
+        let computerHand = 0;
+        function start() {
+            alert();
+            humanScore = 0;
+            computerScore = 0;
+            refreshUI();
+        }
+
+
+        function play(playerHand) {
+            computerHand = Math.ceil(Math.random() * 3);
+            humanHand = playerHand;
+            if( humanHand - computerHand === 1 || humanHand - computerHand === -2 ) {
+                humanScore ++;
+            } else if(computerHand - humanHand === 1 || computerHand - humanHand === -2) {
+                computerScore ++;
+            }
+
+            refreshUI();
+        }
+
+
+        function refreshUI() {
+            document.getElementById("humanScore").innerText = "Score: " + humanScore
+            document.getElementById("computerScore").innerText = "Score: " + computerScore;
+
+
+            let pictureName = "11.jpg.png";
+            if(humanHand === 1) {
+                pictureName = "6.jpg"
+            } else if(humanHand === 2) {
+                pictureName = "5.jpg"
+            } else if(humanHand === 3) {
+                pictureName = "7.jpg"
+            }
+            document.getElementById("humanHand").setAttribute("src", pictureName);
+
+
+            pictureName = "22.jpg.jpg";
+            if(computerHand === 1) {
+                pictureName = "3.jpg"
+            } else if(computerHand === 2) {
+                pictureName = "4.jpg"
+            } else if(computerHand === 3) {
+                pictureName = "1.jpg"
+            }
+
+
+            document.getElementById("computerHand").setAttribute("src", pictureName);
+        }
+
+
+    </script>
+
+
+    <div id="app">
+        <div id="infoBox">
+            <div id="humanBox" class="playerBox">
+                <img id="humanHand" src="11._jpg.png" width="100px"/>
+                <h5>ME</h5>
+                <h6 id="humanScore">Score: 0</h6>
+            </div>
+            <div id="startBox">
+                <button onclick="start()">START</button>
+            </div>
+            <div id="computerBox" class="playerBox">
+                <div id="humanBox">
+                    <img id="computerHand" src="22.jpg.jpg" width="100px" />
+                    <h5>Computer</h5>
+                    <h6 id="computerScore">Score: 0</h6>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="operationBox">
+            <button onclick="play(1)">scissors</button>
+            <button onclick="play(2)">stone</button>
+            <button onclick="play(3)">paper</button>
+        </div>
+    </div>
+</body>
+</html>
